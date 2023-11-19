@@ -16,7 +16,6 @@ const UserMenu = () => {
   return (
     <>
       <WrapUserMenu>
-      <StyledNavLink to="/">Home</StyledNavLink>
       <StyledNavLink to="/contacts">Contacts</StyledNavLink>
       </WrapUserMenu>
       <StyledDiv>

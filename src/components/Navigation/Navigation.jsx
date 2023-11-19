@@ -12,6 +12,7 @@ const Navigation = () => {
   return (
     <>
         <StyledNav>
+          <StyledNavLink to="/">Home</StyledNavLink>
           {authenticated ? (
             <UserMenu />
           ) : (
