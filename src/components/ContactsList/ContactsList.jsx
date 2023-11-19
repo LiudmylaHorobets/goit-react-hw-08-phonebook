@@ -1,6 +1,6 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { deleteContact } from 'redux/contactSlice';
+import { deleteContact } from 'redux/contactsSlice';
 
 import css from './ContactsList.module.css';
 
@@ -12,23 +12,23 @@ export const ContactsList = ({ contacts }) => {
   };
 
   return (
-    <ul className={css.list}>
+    <div className={css.wrapContactList}>
+    <ul className={css.contactsList}>
       {contacts.map(contact => {
         const { id, name, phone } = contact;
         return (
-          <li className={css.contactsList} key={id}>
-            <span className={css.contactsListName}>{name}:</span>
-            <span className={css.contactsListNumber}>{phone}</span>
+          <li className={css.contactsItem} key={id}>
+            <span className={css.contactsItemName}>{name}:</span>
+            <span className={css.contactsItemNumber}>{phone}</span>
             <button
               className={css.buttonDelete}
               type="button"
               onClick={() => handleDelete(id)}
-            >
-              Delete
-            </button>
+            >Delete</button>
           </li>
         );
       })}
     </ul>
+    </div>
   );
 };

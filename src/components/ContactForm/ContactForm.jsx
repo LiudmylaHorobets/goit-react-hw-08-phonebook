@@ -1,11 +1,11 @@
-import React from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import css from './ContactForm.module.css';
-import { selectItems } from 'redux/selectors';
-import { addContact } from 'redux/contactSlice';
+import { Notify } from 'notiflix';
+import { useSelector } from 'react-redux';
 
-export const ContactForm = () => {
-  const dispatch = useDispatch();
+import { selectItems } from 'redux/contacts.selectors';
+import  css  from './ContactForm.module.css';
+
+export const ContactForm = ({ addNewContact }) => {
+
   const contacts = useSelector(selectItems);
 
   const handleSubmit = e => {
@@ -16,26 +16,24 @@ export const ContactForm = () => {
 
     const contactName = nameInput.value;
     const contactPhone = numberInput.value;
-
+    
     if (!contactName || !contactPhone) {
-      alert('Please fill in both name and phone fields');
+      Notify.failure('Please fill in both name and phone fields');
       return;
     }
 
     if (contacts.some(contact => contact.name === contactName)) {
-      alert(`${contactName} is already in contacts`);
+      Notify.failure(`${contactName} is already in contacts`);
       return;
     }
 
-    const newContact = {
-      name: contactName,
-      phone: contactPhone,
+    const newContact = { 
+      name: contactName, 
+      number: contactPhone 
     };
 
-    dispatch(addContact(newContact));
-
-    nameInput.value = '';
-    numberInput.value = '';
+    addNewContact(newContact);
+    e.currentTarget.reset();
   };
 
   return (
